@@ -30,29 +30,7 @@
                 </VisualStateGroupList>
             </Setter>
         </Style>
-    </ContentPage.Resources>
-    <ContentPage.BindingContext>
-        <viewModel:OnboardingViewModel/>
-    </ContentPage.BindingContext>
-
-    <Grid RowSpacing="0" ColumnDefinitions="*,*" RowDefinitions="*,Auto,Auto">
-
-        
-        <CarouselView IsSwipeEnabled="False" x:Name="carosuel" Margin="2" Position="{Binding Position}"
-          Grid.ColumnSpan="2" Grid.RowSpan="3"
-             HorizontalScrollBarVisibility="Never" ItemsUpdatingScrollMode="KeepLastItemInView"
-             IndicatorView="indicatorView"
-             ItemsSource="{Binding Source}"
-             VerticalOptions="FillAndExpand"
-             IsScrollAnimated="False"
-             HorizontalOptions="FillAndExpand">
-
-            <CarouselView.ItemsLayout>
-                <LinearItemsLayout Orientation="Horizontal" />
-            </CarouselView.ItemsLayout>
-
-            <CarouselView.ItemTemplate>
-                <DataTemplate>
+     <DataTemplate x:Key="CarouselViewTemplate">
                     <Border  BackgroundColor="{Binding Color}">
                         <Border.StrokeShape>
 
@@ -80,8 +58,24 @@
                         </Grid>
                     </Border>
                 </DataTemplate>
-            </CarouselView.ItemTemplate>
-        </CarouselView>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <viewModel:OnboardingViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid RowSpacing="0" ColumnDefinitions="*,*" RowDefinitions="*,Auto,Auto">
+
+        
+<CarouselView x:Name="carousel" Margin="2" Grid.ColumnSpan="2" Grid.RowSpan="3"   
+                Position="{Binding Position}" IsSwipeEnabled="False" HorizontalScrollBarVisibility="Never"
+                ItemsUpdatingScrollMode="KeepLastItemInView" IsScrollAnimated="False" 
+                VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IndicatorView="indicatorView"
+                ItemsSource="{Binding Source}"  ItemTemplate="{StaticResource CarouselViewTemplate}">
+
+    <CarouselView.ItemsLayout>
+        <LinearItemsLayout Orientation="Horizontal" />
+    </CarouselView.ItemsLayout>
+</CarouselView>
 
         <IndicatorView x:Name="indicatorView"  
                    Grid.Row="1" HeightRequest="50" MinimumWidthRequest="120"
